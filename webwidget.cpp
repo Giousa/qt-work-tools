@@ -1,7 +1,8 @@
 #include "webwidget.h"
 #include "ui_webwidget.h"
 #include <QDebug>
-#include <QtWebEngineWidgets/QWebEngineView>
+#include <QtWebEngineWidgets>
+#include "customwebview.h"
 
 WebWidget::WebWidget(QWidget *parent,QString toolName, QString toolURL) :
     QWidget(parent),
@@ -16,10 +17,14 @@ WebWidget::WebWidget(QWidget *parent,QString toolName, QString toolURL) :
 
     this->setWindowTitle(toolName);
 
-    QWebEngineView *view = new QWebEngineView;
-    QUrl url = QUrl::fromUserInput(toolURL);
-    view->load(url);
+//    QNetworkProxyFactory::setUseSystemConfiguration(false);
+
+//    QWebEngineView *view = new QWebEngineView;
+    CustomWebView *view = new CustomWebView(this);
     ui->gridLayout->addWidget(view);
+//    QUrl url = QUrl::fromUserInput(toolURL);
+    view->load(toolURL);
+
 
 }
 
